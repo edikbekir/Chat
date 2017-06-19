@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>CHAT</title>
+        <meta charset="utf-8">
+        <script type="text/javascript" src = "https://cdn.socket.io/socket.io-1.4.5.js"></script>
+        <style type="text/css">
+body{
+    margin: 0;
+    font-size: 28px;
+}
+.panel{
+    position: fixed;
+    bottom:0;
+    left:0;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    background: brown;
+}
+input{
+    font-size: inherit;
+    width: 100%;
+    
+}
+.inputs {
+    display: flex;
+}
+.input-left {
+    max-width: 20%;
+    padding-right: 0.5em;
+}
+
+.input-left,.input-right{ 
+    flex-grow: 1;
+}
+
+        </style>
+        <script type =text/javascript>
+        var socket = io({transports:["websocket"]});
+        socket.on("message",function(data){
+            
+        })
+        
+        function sendMessage(nickname,message){
+            if(nickname && message){
+                socket.emit("message",{nickname:nickname, message:message})
+            }
+        }
+        
+    </script>
+    </head>
+    <body>
+
+
+        <div id = "messages">
+            <p align = "center" id="greeting">Welcome!</p>
+        </div>
+        <div class="panel">
+            <form onsubmit = "sendMessage(this.nickname.value,this.message.value);">
+            <div class="inputs">
+                
+                        <div class = "input-left">
+                            <input name="nickname" placeholder="nickname" type="text" autofocus="" autocomplete="off">
+                        </div>
+                        <div class="input-right">
+                            <input name="message" placeholder="message" type="text" autocomplete="off">
+                        </div>
+                
+            </div>
+            <input  type = "submit" style="display:none">
+            </form>    
+        </div>
+    </body>
+
+</html>
